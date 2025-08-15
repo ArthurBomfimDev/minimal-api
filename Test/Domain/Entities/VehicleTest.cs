@@ -7,7 +7,7 @@ namespace Test.Domain.Entities;
 public class VehicleTest
 {
     [Fact]
-    public void Create_WithValidData_ShouldReturnSuccess()
+    public void Criar_ComDadosValidos_DeveRetornarSucesso()
     {
         var code = "ABC-1234";
         var model = "Corolla";
@@ -27,7 +27,7 @@ public class VehicleTest
     [InlineData("", "Model", "Make", 2025)] 
     [InlineData("ABC-1234", "", "Make", 2025)] 
     [InlineData("ABC-1234", "Model", "Make", 1940)] 
-    public void Create_WithInvalidData_ShouldReturnFailure(string code, string model, string make, int year)
+    public void Criar_ComDadosInvalidos_DeveRetornarFalha(string code, string model, string make, int year)
     {
         var result = Vehicle.Create(code, model, make, year, "Descrição");
 
@@ -37,7 +37,7 @@ public class VehicleTest
     }
 
     [Fact]
-    public void Update_WithValidData_ShouldUpdateProperties()
+    public void Atualizar_ComDadosValidos_DeveAtualizarPropriedades()
     {
         var vehicle = Vehicle.Create("ABC-1234", "Corolla", "Toyota", 2025, "Original").Value;
         var newModel = "Hilux";

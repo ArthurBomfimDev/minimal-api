@@ -18,7 +18,7 @@ public class AdministradorTest
     }
 
     [Fact]
-    public void Create_WithValidData_ShouldReturnSuccess()
+    public void Criar_ComDadosValidos_DeveRetornarSucesso()
     {
         var email = "test@test.com";
         var password = "password123";
@@ -37,7 +37,7 @@ public class AdministradorTest
     [InlineData("invalid-email", "password123", 1)] // Email inválido
     [InlineData("test@test.com", "123", 1)]       // Senha curta
     [InlineData("test@test.com", "password123", 3)] // Role inválida
-    public void Create_WithInvalidData_ShouldReturnFailure(string email, string password, int role)
+    public void Criar_ComDadosInvalidos_DeveRetornarFalha(string email, string password, int role)
     {
         var result = Administrator.Create(email, password, (EnumRole)role, _passwordEncryptorServiceMock.Object.HashPassword("password"));
 

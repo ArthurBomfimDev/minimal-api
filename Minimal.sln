@@ -18,6 +18,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minimal.Api", "src\Presenta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minimal.Infrastructure", "src\Infrastructure\Minimal.Infrastructure\Minimal.Infrastructure.csproj", "{50D6CBFA-929B-9092-43B5-983A6AB23926}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B02C4C3-5AC8-41A6-AFFD-3FCE39620467} = {1B02C4C3-5AC8-41A6-AFFD-3FCE39620467}
+		{3DEDA5C4-29D4-4A45-B03A-8F80C74A6ACF} = {3DEDA5C4-29D4-4A45-B03A-8F80C74A6ACF}
+		{50D6CBFA-929B-9092-43B5-983A6AB23926} = {50D6CBFA-929B-9092-43B5-983A6AB23926}
+		{B585E963-E325-44BC-9197-D08705CA1187} = {B585E963-E325-44BC-9197-D08705CA1187}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +48,10 @@ Global
 		{50D6CBFA-929B-9092-43B5-983A6AB23926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50D6CBFA-929B-9092-43B5-983A6AB23926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50D6CBFA-929B-9092-43B5-983A6AB23926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
