@@ -27,19 +27,19 @@ public class Vehicle : BaseEntity<Vehicle>
     {
         var notifications = new List<Notification>();
 
-        var codeValidation = ValidationRules.IsNull(code, nameof(code));
+        var codeValidation = ValidationRules.IsNull(code, "Codigo");
         if (codeValidation != null) notifications.Add(codeValidation);
 
-        var modelValidation = ValidationRules.ValidateLength(model, nameof(model), maxLength: 100);
+        var modelValidation = ValidationRules.ValidateLength(model, "Modelo", maxLength: 100);
         if (modelValidation != null) notifications.Add(modelValidation);
 
-        var makeValidation = ValidationRules.ValidateLength(make, nameof(make), maxLength: 50);
+        var makeValidation = ValidationRules.ValidateLength(make, "Fabricante", maxLength: 50);
         if (makeValidation != null) notifications.Add(makeValidation);
 
-        var yearValidation = ValidationRules.ValidateYear(year, nameof(year), minYear: 1950);
+        var yearValidation = ValidationRules.ValidateYear(year, "Ano", minYear: 1950);
         if (yearValidation != null) notifications.Add(yearValidation);
 
-        var descriptionValidation = ValidationRules.ValidateLength(description, nameof(description), maxLength: 300, isNullable: true);
+        var descriptionValidation = ValidationRules.ValidateLength(description, "Descrição", maxLength: 300, isNullable: true);
         if (descriptionValidation != null) notifications.Add(descriptionValidation);
 
         if (notifications.Count > 0) return BaseResult<Vehicle>.Failure(notifications);
@@ -53,13 +53,13 @@ public class Vehicle : BaseEntity<Vehicle>
     {
         var notifications = new List<Notification>();
 
-        var modelValidation = ValidationRules.ValidateLength(model, nameof(model), maxLength: 100);
+        var modelValidation = ValidationRules.ValidateLength(model, "Modelo", maxLength: 100);
         if (modelValidation != null) notifications.Add(modelValidation);
 
-        var makeValidation = ValidationRules.ValidateLength(make, nameof(make), maxLength: 50);
+        var makeValidation = ValidationRules.ValidateLength(make, "Fabricante", maxLength: 50);
         if (makeValidation != null) notifications.Add(makeValidation);
 
-        var descriptionValidation = ValidationRules.ValidateLength(description, nameof(description), maxLength: 300, isNullable: true);
+        var descriptionValidation = ValidationRules.ValidateLength(description, "Descrição", maxLength: 300, isNullable: true);
         if (descriptionValidation != null) notifications.Add(descriptionValidation);
 
         if (notifications.Count > 0) return BaseResult<bool>.Failure(notifications);

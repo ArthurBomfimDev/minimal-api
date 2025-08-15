@@ -79,4 +79,14 @@ public static class ValidationRules
         return null;
     }
     #endregion
+
+    #region Enuns
+    public static Notification? ValidateEnum<TEnum>(TEnum enumValidate, string fieldName) where TEnum : struct
+    {
+        if (enumValidate.ToString() == null)
+            return Notification.Error($"O Enum digitado no campo {fieldName} é invalido");
+
+        return null;
+    }
+    #endregion
 }

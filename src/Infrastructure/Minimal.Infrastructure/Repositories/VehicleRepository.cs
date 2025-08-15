@@ -9,9 +9,7 @@ namespace Minimal.Infrastructure.Repositories;
 
 public class VehicleRepository : BaseRepository<Vehicle>, IVehicleRepository
 {
-    public VehicleRepository(AppDbContext context) : base(context)
-    {
-    }
+    public VehicleRepository(AppDbContext context) : base(context) { }
 
     public async Task<Vehicle?> GetByCodeAsync(string code)
     {

@@ -1,44 +1,41 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Minimal.Domain.Entities;
+using Minimal.Infrastructure.Configuration.Base;
 
 namespace Minimal.Infrastructure.Configuration;
 
-public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
+public class VehicleConfiguration : BaseEntityConfiguration<Vehicle>
 {
-    public void Configure(EntityTypeBuilder<Vehicle> builder)
+    public override void Configure(EntityTypeBuilder<Vehicle> builder)
     {
-        builder.ToTable("Vehicles");
+        base.Configure(builder);
 
-        builder.HasKey(v => v.Id);
+        builder.ToTable("veiculos");
 
         builder.Property(v => v.Code)
+            .HasColumnName("codigo")
             .HasMaxLength(12)
             .IsRequired();
 
         builder.HasIndex(v => v.Code).IsUnique();
 
         builder.Property(v => v.Model)
+            .HasColumnName("modelo")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(v => v.Make)
-            .HasMaxLength(50);
+            .HasColumnName("marca")
+            .HasMaxLength(50)
+            .IsRequired();
 
         builder.Property(v => v.Year)
+            .HasColumnName("ano")
             .IsRequired();
 
         builder.Property(v => v.Description)
             .HasMaxLength(300)
             .IsRequired(false);
-
-        builder.Property(v => v.CreatedDate)
-            .IsRequired();
-
-        builder.Property(v => v.ChangedDate)
-            .IsRequired(false);
-
-        builder.Property(v => v.IsActive)
-            .IsRequired();
     }
 }

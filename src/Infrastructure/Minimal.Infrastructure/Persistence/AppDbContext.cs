@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Minimal.Domain.Entities;
+using System.Reflection;
 
 namespace Minimal.Infrastructure.Persistence;
 
@@ -12,7 +13,8 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+        base.OnModelCreating(modelBuilder);
     }
 }

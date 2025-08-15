@@ -24,15 +24,12 @@ public class VehicleService : IVehicleService
         var existingVehicle = await _vehicleRepository.GetByCodeAsync(inputCreateVehicle.Code);
 
         if (existingVehicle != null)
-        {
             return BaseResult<OutputVehicle>.Failure(Notification.Error("Já existe um veículo com este código."));
-        }
 
         var vehicleResult = Vehicle.Create(inputCreateVehicle.Code, inputCreateVehicle.Model, inputCreateVehicle.Make, inputCreateVehicle.Year, inputCreateVehicle.Description);
+
         if (!vehicleResult.IsSuccess)
-        {
             return BaseResult<OutputVehicle>.Failure(vehicleResult.listNotification);
-        }
 
         await _vehicleRepository.Create(vehicleResult.Value!);
         await _unitOfWork.SaveChangesAsync();

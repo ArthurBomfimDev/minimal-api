@@ -1,14 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Minimal.Infrastructure.Persistence;
 
+namespace Minimal.Api.Extensions;
+
 public static class ContextExtension
 {
-    public static IServiceCollection ConfigureContext(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        string mySqlConnection = configuration.GetConnectionString("DefaultConnection");
+        string connectionString = configuration.GetConnectionString("DefaultConnection")!;
 
         services.AddDbContext<AppDbContext>(options =>
-            options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+            options.UseSqlServer(connectionString));
 
         return services;
     }
