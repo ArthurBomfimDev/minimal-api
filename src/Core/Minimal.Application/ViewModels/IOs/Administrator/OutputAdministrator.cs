@@ -8,7 +8,7 @@ public class OutputAdministrator
 
     public OutputAdministrator()
     {
-        
+
     }
 
     public OutputAdministrator(Guid id, string email, string role)

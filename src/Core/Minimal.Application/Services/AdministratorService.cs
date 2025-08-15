@@ -28,7 +28,7 @@ public class AdministratorService : IAdministratorService
     {
         var admin = await _administratorRepository.GetByEmail(inputLoginAuthenticate.Email);
 
-        if (admin == null || (admin!= null && !_encryptor.VerifyPassword(inputLoginAuthenticate.Password, admin.Password)))
+        if (admin == null || (admin != null && !_encryptor.VerifyPassword(inputLoginAuthenticate.Password, admin.Password)))
         {
             throw new UnauthorizedAccessException("Email ou senha inválidos.");
         }

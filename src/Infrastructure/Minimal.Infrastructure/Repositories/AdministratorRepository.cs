@@ -13,7 +13,7 @@ public class AdministratorRepository : BaseRepository<Administrator>, IAdministr
 
     public async Task<Administrator?> GetByEmail(string email)
     {
-            return await _dbSet.FirstOrDefaultAsync(x => x.Email == email);
+        return await _dbSet.FirstOrDefaultAsync(x => x.Email == email);
     }
     public List<Administrator> GetAllWithPagination(InputPaginationAdministrator inputPaginationAdministrator)
     {

@@ -1,39 +1,42 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using MinimalApi.Dominio.Interfaces;
-using Test.Mocks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Minimal.Application.Interfaces.Services;
+using Minimal.Infrastructure.Persistence;
+using Moq;
 
-namespace Test.Helpers;
+namespace Minimal.Test.Helpers;
 
-public class Setup
+public class ApiWebApplicationFactory : WebApplicationFactory<Program> 
 {
-    public const string PORT = "5001";
-    public static TestContext testContext = default!;
-    public static WebApplicationFactory<Startup> http = default!;
-    public static HttpClient client = default!;
+    public readonly Mock<IAdministratorService> AdministratorServiceMock = new();
+    public readonly Mock<IVehicleService> VehicleServiceMock = new();
 
-    public static void ClassInit(TestContext testContext)
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        Setup.testContext = testContext;
-        Setup.http = new WebApplicationFactory<Startup>();
+        builder.UseEnvironment("Testing"); 
 
-        Setup.http = Setup.http.WithWebHostBuilder(builder =>
+        builder.ConfigureServices(services =>
         {
-            builder.UseSetting("https_port", Setup.PORT).UseEnvironment("Testing");
-            
-            builder.ConfigureServices(services =>
+            var dbContextDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<AppDbContext>));
+            if (dbContextDescriptor != null)
             {
-                services.AddScoped<IAdministradorServico, AdministradorServicoMock>();
+                services.Remove(dbContextDescriptor);
+            }
+
+            services.RemoveAll<IAdministratorService>();
+            services.RemoveAll<IVehicleService>();
+
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("InMemoryTestDb");
             });
 
+            services.AddScoped<IAdministratorService>(_ => AdministratorServiceMock.Object);
+            services.AddScoped<IVehicleService>(_ => VehicleServiceMock.Object);
         });
-
-        Setup.client = Setup.http.CreateClient();
-    }
-
-    public static void ClassCleanup()
-    {
-        Setup.http.Dispose();
     }
 }

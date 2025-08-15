@@ -81,10 +81,14 @@ public static class ValidationRules
     #endregion
 
     #region Enuns
-    public static Notification? ValidateEnum<TEnum>(TEnum enumValidate, string fieldName) where TEnum : struct
+    public static Notification? ValidateEnum<TEnum>(TEnum enumValue, string fieldName) where TEnum : struct, Enum
     {
-        if (enumValidate.ToString() == null)
-            return Notification.Error($"O Enum digitado no campo {fieldName} é invalido");
+        if (!Enum.IsDefined(typeof(TEnum), enumValue))
+        {
+            var validOptions = string.Join(" | ", (from i in Enum.GetValues<TEnum>()
+                                                   select $"{Convert.ToInt32(i)} - {i}"));
+            return Notification.Error($"O valor para o campo '{fieldName}' é inválido. Valores aceitos: {validOptions}.");
+        }
 
         return null;
     }

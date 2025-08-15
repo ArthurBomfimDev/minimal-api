@@ -11,7 +11,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbConte
         string apiProjectPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/Minimal.Api"));
 
         var configuration = new ConfigurationBuilder()
-            .SetBasePath(apiProjectPath) 
+            .SetBasePath(apiProjectPath)
             .AddJsonFile("appsettings.json")
             .AddJsonFile("appsettings.Development.json", optional: true)
             .Build();

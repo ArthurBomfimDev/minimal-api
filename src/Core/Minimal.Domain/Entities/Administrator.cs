@@ -27,11 +27,11 @@ public class Administrator : BaseEntity<Administrator>
         var emailValidation = ValidationRules.IsEmail(email, "Email", 320);
         if (emailValidation != null) notifications.Add(emailValidation);
 
-        var passwordValidation = ValidationRules.ValidateLength(password, "Senha", maxLength: 30 ,minLength: 6);
+        var passwordValidation = ValidationRules.ValidateLength(password, "Senha", maxLength: 30, minLength: 6);
         if (passwordValidation != null) notifications.Add(passwordValidation);
 
         var roleValidate = ValidationRules.ValidateEnum<EnumRole>(role, "Cargo");
-        if(roleValidate != null) notifications.Add(Notification.Error("Cargo escolhido invalido! - Selecione Cargo 1 - Administrador | 2 - Editor"));
+        if (roleValidate != null) notifications.Add(roleValidate);
 
         if (notifications.Count > 0) return BaseResult<Administrator>.Failure(notifications);
 
